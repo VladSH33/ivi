@@ -1,0 +1,80 @@
+.fileUpload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  .uploadButton {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    background: var(--bg-color-secondary);
+    color: var(--text-color-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    position: relative;
+
+    &:hover:not(:disabled) {
+      border-color: #667eea;
+      background: var(--bg-color-tertiary);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    svg {
+      transition: transform 0.2s ease;
+    }
+
+    &:hover:not(:disabled) svg {
+      transform: scale(1.1);
+    }
+  }
+
+  .uploadLabel {
+    font-size: 12px;
+    color: var(--text-color-secondary);
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--border-color);
+    border-top: 2px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+  .fileUpload {
+    .uploadButton {
+      width: 40px;
+      height: 40px;
+    }
+
+    .uploadLabel {
+      font-size: 11px;
+    }
+  }
+} 

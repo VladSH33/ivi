@@ -1,0 +1,176 @@
+.sideContentWidget {
+  background-color: #312b45;
+  border-radius: 8px;
+  height: 275px;
+  overflow: hidden;
+  position: relative;
+
+  .posterBlock {
+    transform: translateY(-64px);
+  }
+
+  .leftFade {
+    background-image: linear-gradient(
+      270deg,
+      rgba(49, 43, 69, 0),
+      rgba(49, 43, 69, 0.96)
+    );
+    height: 264px;
+    left: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 64px;
+  }
+
+  .rightFade {
+    background-image: linear-gradient(
+      90deg,
+      rgba(49, 43, 69, 0),
+      rgba(49, 43, 69, 0.96)
+    );
+    height: 264px;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 64px;
+  }
+
+  .bottomPanel {
+    background-color: rgba(49, 43, 69, 0.96);
+    height: 72px;
+    pointer-events: auto;
+    bottom: 0;
+    left: 0;
+    padding-bottom: 12px;
+    padding-top: 8px;
+    position: absolute;
+    right: 0;
+    transition: height 0.3s ease;
+    pointer-events: auto;
+
+    .bottomFade {
+      background-image: linear-gradient(
+        180deg,
+        rgba(49, 43, 69, 0),
+        rgba(49, 43, 69, 0.96)
+      );
+      height: 48px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: -48px;
+    }
+
+    .detailsBlock {
+      transition: transform 0.3s ease;
+      z-index: 1;
+      display: flex;
+      height: 48px;
+      margin-left: 16px;
+      margin-right: 16px;
+
+      .logo {
+        border-radius: 8px;
+        height: 48px;
+        position: relative;
+        width: 48px;
+        background-color: #f30745;
+      }
+
+      .textBlock {
+        align-self: center;
+        flex-grow: 1;
+        flex-shrink: 0;
+        height: 44px;
+        margin-left: 12px;
+
+        .title {
+          color: #fff;
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 700;
+          height: 24px;
+          line-height: 24px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .extra {
+          color: #d9d7e0;
+          font-size: 13px;
+          font-style: normal;
+          font-weight: 400;
+          height: 16px;
+          line-height: 16px;
+          margin-top: 4px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .buttonWrapper {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: auto;
+      z-index: 2;
+      bottom: 36px;
+      left: 16px;
+      position: absolute;
+      right: 16px;
+
+      .btn {
+        background-color: #f30745;
+        border-color: #f30745;
+        border-radius: 8px;
+        border-width: 1px;
+        height: 32px;
+        padding: 7px 11px;
+        width: 100%;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: #f9255d;
+          border-color: #f9255d;
+          transform: scale(1.04);
+        }
+      }
+    }
+    .note {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      bottom: 12px;
+      color: #a5a1b2;
+      font-size: 10px;
+      font-weight: 400;
+      height: 12px;
+      left: 16px;
+      position: absolute;
+      right: 16px;
+      text-align: center;
+    }
+  }
+
+  &:hover {
+    .bottomPanel {
+      height: 140px;
+      transition-duration: 0.3s;
+
+      .buttonWrapper {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .note {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+.messageInput {
+  .inputContainer {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    padding: 16px;
+    background: var(--bg-color-secondary);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    transition: border-color 0.2s ease;
+
+    &:focus-within {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+  }
+
+  .textarea {
+    flex: 1;
+    min-height: 20px;
+    max-height: 120px;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text-color-primary);
+    font-size: 14px;
+    line-height: 20px;
+    resize: none;
+    font-family: inherit;
+
+    &::placeholder {
+      color: var(--text-color-secondary);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+  
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--text-color-secondary);
+      border-radius: 2px;
+      opacity: 0.3;
+    }
+  }
+
+  .sendButton {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+
+    &:hover:not(:disabled) {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.95);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    svg {
+      transition: transform 0.2s ease;
+    }
+
+    &:hover:not(:disabled) svg {
+      transform: translateX(1px);
+    }
+  }
+
+  .inputHint {
+    font-size: 12px;
+    color: var(--text-color-secondary);
+    margin-top: 8px;
+    text-align: center;
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 768px) {
+  .messageInput {
+    .inputContainer {
+      padding: 12px;
+    }
+
+    .sendButton {
+      width: 36px;
+      height: 36px;
+    }
+
+    .inputHint {
+      font-size: 11px;
+      margin-top: 6px;
+    }
+  }
+} 

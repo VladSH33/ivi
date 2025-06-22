@@ -24,5 +24,30 @@ export function buildWebpack(options: BuildOptions): webpack.Configuration {
     resolve: buildResolvers(options),
     devtool: isDev ? "eval-cheap-module-source-map" : "source-map",
     devServer: isDev ? buildDevServer(options) : undefined,
+    ...(isDev && {
+      cache: {
+        type: 'filesystem',
+        buildDependencies: {
+          config: [__filename]
+        }
+      },
+      watchOptions: {
+        aggregateTimeout: 300,
+        poll: false,
+        ignored: /node_modules/,
+      },
+      optimization: {
+        splitChunks: {
+          chunks: 'all',
+          cacheGroups: {
+            vendor: {
+              test: /[\\/]node_modules[\\/]/,
+              name: 'vendors',
+              chunks: 'all',
+            },
+          },
+        },
+      },
+    }),
   };
 }

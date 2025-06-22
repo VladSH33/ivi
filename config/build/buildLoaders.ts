@@ -33,6 +33,17 @@ export function buildLoaders(options: BuildOptions): ModuleOptions["rules"] {
     ],
   };
 
+  const videoLoader = {
+    test: /\.(mp4|webm)$/,
+    use: {
+      loader: "file-loader",
+      options: {
+        name: "[name].[hash].[ext]",
+        outputPath: "static/media/",
+      },
+    },
+  };
+
   const cssLoaderWithModules = {
     loader: "css-loader",
     options: {
@@ -63,6 +74,13 @@ export function buildLoaders(options: BuildOptions): ModuleOptions["rules"] {
         loader: "ts-loader",
         options: {
           transpileOnly: true,
+          experimentalWatchApi: true,
+          configFile: "tsconfig.json",
+          compilerOptions: {
+            noEmit: false,
+            incremental: true,
+            tsBuildInfoFile: '.tsbuildinfo',
+          },
           getCustomTransformers: () => ({
             before: [isDev && ReactRefreshTypeScript()].filter(Boolean),
           }),
@@ -71,5 +89,5 @@ export function buildLoaders(options: BuildOptions): ModuleOptions["rules"] {
     ],
   };
 
-  return [scssLoader, tsLoader, assetLoader, svgrLoader];
+  return [scssLoader, tsLoader, assetLoader, svgrLoader, videoLoader];
 }

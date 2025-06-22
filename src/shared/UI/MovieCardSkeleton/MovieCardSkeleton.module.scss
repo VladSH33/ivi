@@ -1,0 +1,62 @@
+.movieCardSkeleton {
+  width: 100%;
+  border-radius: 1.8rem;
+  overflow: hidden;
+
+  .poster {
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .title {
+    margin: 0 auto 8px;
+    display: block;
+  }
+
+  .meta {
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+@media (max-width: 1100px) {
+  .movieCardSkeleton {
+    border-radius: 1.6rem;
+    
+    .poster {
+      margin-bottom: 10px;
+    }
+    
+    .title {
+      margin-bottom: 6px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .movieCardSkeleton {
+    border-radius: 1.4rem;
+    
+    .poster {
+      margin-bottom: 8px;
+    }
+    
+    .title {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .movieCardSkeleton {
+    border-radius: 1.2rem;
+    
+    .poster {
+      margin-bottom: 6px;
+    }
+    
+    .title {
+      margin-bottom: 4px;
+    }
+  }
+}

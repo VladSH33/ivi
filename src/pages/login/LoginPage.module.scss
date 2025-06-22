@@ -1,0 +1,85 @@
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.authContainer {
+  width: 100%;
+  max-width: 500px;
+  background: var(--bg-color-secondary);
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.tabButton {
+  flex: 1;
+  padding: 18px 20px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #6c757d;
+  background-color: var(--bg-color-secondary);
+
+  &:hover {
+    background-color: var(--button-secondary-hover-bg);
+  }
+
+  &.active {
+    color: #a5a1b2;
+    border-bottom: 3px solid #a5a1b2;
+    margin-bottom: -1px;
+  }
+}
+
+.formContainer {
+  padding: 30px;
+}
+
+.switchText {
+  text-align: center;
+  margin-top: 25px;
+  color: #6c757d;
+  font-size: 15px;
+}
+
+.switchButton {
+  background: none;
+  border: none;
+  color: #b733567e;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0 5px;
+  text-decoration: underline;
+
+  &:hover {
+    color: #cd093d;
+    text-decoration: none;
+  }
+}
+
+.logoContainer {
+  text-align: center;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 10px;
+}
+
+.tagline {
+  color: #6c757d;
+  font-size: 16px;
+}

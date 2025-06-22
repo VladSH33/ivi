@@ -1,0 +1,204 @@
+.voiceRecorder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+
+  .recordButton {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    background: var(--bg-color-secondary);
+    color: var(--text-color-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    transition: all 0.2s ease;
+    position: relative;
+
+    &:hover {
+      border-color: #ff4757;
+      background: var(--bg-color-tertiary);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(255, 71, 87, 0.2);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  .recordLabel {
+    font-size: 12px;
+    color: var(--text-color-secondary);
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .recordingInterface {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: var(--bg-color-secondary);
+    border-radius: 16px;
+    border: 2px solid #ff4757;
+    box-shadow: 0 8px 24px rgba(255, 71, 87, 0.2);
+    min-width: 280px;
+    max-width: 320px;
+
+    .visualizer {
+      width: 100%;
+      height: 40px;
+      background: var(--bg-color-primary);
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+
+      .audioLevel {
+        height: 100%;
+        background: linear-gradient(90deg, #2ed573 0%, #ff9ff3 50%, #ff4757 100%);
+        border-radius: 20px;
+        transition: transform 0.1s ease;
+        transform-origin: left center;
+        min-width: 20px;
+      }
+    }
+
+    .recordingInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+
+      .recordingTime {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text-color-primary);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .recordingStatus {
+        font-size: 12px;
+        color: #ff4757;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        
+        &:before {
+          content: "●";
+          margin-right: 6px;
+          animation: blink 1.5s ease-in-out infinite;
+        }
+      }
+    }
+
+    .recordingControls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      button {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 700;
+        transition: all 0.2s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+
+      .pauseButton {
+        background: #ffa502;
+        color: white;
+        box-shadow: 0 4px 12px rgba(255, 165, 2, 0.3);
+
+        &:hover {
+          background: #ff9500;
+          box-shadow: 0 6px 16px rgba(255, 165, 2, 0.4);
+        }
+      }
+
+      .stopButton {
+        background: #2ed573;
+        color: white;
+        box-shadow: 0 4px 12px rgba(46, 213, 115, 0.3);
+
+        &:hover {
+          background: #26d063;
+          box-shadow: 0 6px 16px rgba(46, 213, 115, 0.4);
+        }
+      }
+
+      .cancelButton {
+        background: #ff4757;
+        color: white;
+        box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+
+        &:hover {
+          background: #ff3838;
+          box-shadow: 0 6px 16px rgba(255, 71, 87, 0.4);
+        }
+      }
+    }
+  }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
+@media (max-width: 768px) {
+  .voiceRecorder {
+    .recordButton {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+    }
+
+    .recordLabel {
+      font-size: 11px;
+    }
+
+    .recordingInterface {
+      padding: 16px;
+      min-width: 250px;
+      max-width: 280px;
+
+      .visualizer {
+        height: 32px;
+      }
+
+      .recordingInfo .recordingTime {
+        font-size: 20px;
+      }
+
+      .recordingControls {
+        gap: 8px;
+
+        button {
+          width: 44px;
+          height: 44px;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+} 

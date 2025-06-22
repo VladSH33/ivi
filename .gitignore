@@ -1,2 +1,33 @@
 /build
 node_modules
+.env
+
+.tsbuildinfo
+
+node_modules/.cache/
+
+# Медиа файлы и большие ресурсы
+# Изображения фильмов (большие файлы)
+src/shared/assets/image/film*.jpg
+src/shared/assets/image/filmCard*.jpeg
+public/posters/filmCard*.jpeg
+
+# Изображения для слайдера подписки
+src/shared/assets/image/SubscriptionTeaser/
+
+# Видео файлы (очень большие)
+src/shared/assets/video/
+*.mp4
+*.mov
+*.avi
+
+# Большие изображения в целом
+*.jpg
+*.jpeg
+*.png
+*.gif
+!src/shared/assets/icons/*.svg
+!public/assets/filterIcons/*.svg
+
+# Исключения для важных маленьких файлов
+!public/favicon.ico

@@ -1,0 +1,564 @@
+.filters {
+  margin-top: 24px;
+
+  .loadingMessage {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-color-primary);
+    font-size: 16px;
+  }
+
+  .filtersContainer {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1216px;
+
+    .filtersContent {
+      background-color: var(--bg-color-secondary);
+      border-radius: 28px;
+      box-sizing: border-box;
+      padding: 16px;
+
+      .filtersPlankList {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+
+        .plankItem {
+          padding-left: 6px;
+          padding-right: 6px;
+          width: 33%;
+          position: relative;
+
+          &.active {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-color: var(--primary-color);
+
+            .plankLabel {
+              font-weight: bold;
+              color: white;
+            }
+          }
+
+                    .filterDropdownGenres {
+            margin-top: 8px;
+            top: 100%;
+            position: absolute;
+            z-index: 100;
+            background: var(--bg-color-primary);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+
+            .filterDropdownGenresContent {
+              padding: 16px;
+              display: flex;
+              gap: 12px;
+              background: var(--bg-color-primary);
+              border-radius: 16px;
+
+              .poster {
+                width: 110px;
+                background: var(--bg-color-secondary);
+                border: 2px solid transparent;
+                border-radius: 50px;
+                padding: 16px 12px;
+                cursor: pointer;
+                text-align: center;
+                transition: all 0.2s ease;
+                color: var(--text-color-primary);
+                font-weight: 500;
+
+                &.selected {
+                  background: var(--primary-color);
+                  border-color: var(--primary-color);
+                  color: white;
+                }
+
+                &:hover {
+                  background: var(--button-secondary-hover-bg);
+                  border-color: var(--primary-color);
+                }
+
+                img {
+                  width: 100%;
+                  height: auto;
+                  max-width: 40px;
+                  margin-bottom: 8px;
+                  transition: transform 0.2s ease;
+                }
+
+                &:hover img {
+                  transform: scale(1.05);
+                }
+
+                .titleCaption {
+                  font-size: 13px;
+                  font-weight: 500;
+                  line-height: 1.3;
+                  transition: color 0.2s ease;
+                }
+
+                &:hover .titleCaption {
+                  color: var(--text-color-primary);
+                }
+
+                &.selected .titleCaption {
+                  color: white;
+                  font-weight: 600;
+                }
+              }
+            }
+          }
+
+          .plank {
+            background-color: var(--button-secondary-bg);
+            cursor: pointer;
+            display: flex;
+            padding: 8px 16px;
+            border-radius: 16px;
+            height: 56px;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+
+            &:hover {
+              background-color: var(--button-secondary-hover-bg);
+              border-color: var(--button-secondary-hover-bg);
+              transform: scale(1.04);
+            }
+
+            .arrow {
+              transition: transform 0.3s ease;
+
+              &Rotated {
+                transform: rotate(180deg);
+              }
+            }
+
+            .plankInner {
+              display: flex;
+              flex-direction: column;
+              gap: 5px;
+
+              .selectedFilterValue {
+                color: #a5a1b2;
+                font-size: 13px;
+                height: 500;
+              }
+            }
+          }
+        }
+      }
+      
+      .filtersbuttonResetWrapper {
+        margin: 0 auto;
+        width: 150px;
+
+        .filtersbuttonReset {
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          gap: 10px;
+          opacity: 1;
+          transition: opacity 0.3s ease;
+          color: var(--text-color-primary);
+
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+
+            svg,
+            span {
+              opacity: 0.5;
+            }
+          }
+
+          span {
+            color: var(--text-color-primary);
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 10px;
+            transition: inherit;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 1240px) {
+  .filters {
+    margin-top: 20px;
+    
+    .filtersContainer {
+      width: 100%;
+      max-width: 1100px;
+      padding: 0 20px;
+      
+      .filtersContent {
+        border-radius: 24px;
+        padding: 14px;
+        
+        .filtersPlankList {
+          margin-bottom: 16px;
+          
+          .plankItem {
+            padding-left: 4px;
+            padding-right: 4px;
+            width: 50%;
+            margin-bottom: 8px;
+            
+            .filterDropdownGenres {
+              left: -10px;
+              right: -10px;
+              width: auto;
+              z-index: 110;
+              min-width: 280px;
+              border-radius: 14px;
+              
+              .filterDropdownGenresContent {
+                padding: 14px;
+                gap: 10px;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                border-radius: 14px;
+                
+                .poster {
+                  width: 85px;
+                  padding: 12px 8px;
+                  border-radius: 40px;
+                  
+                  img {
+                    max-width: 30px;
+                    margin-bottom: 6px;
+                  }
+                  
+                  .titleCaption {
+                    font-size: 12px;
+                  }
+                }
+              }
+            }
+            
+            .plank {
+              padding: 6px 12px;
+              height: 48px;
+              border-radius: 14px;
+              
+              &:hover {
+                transform: scale(1.02);
+              }
+              
+              .plankInner {
+                gap: 3px;
+                
+                .plankLabel {
+                  font-size: 14px;
+                }
+                
+                .selectedFilterValue {
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+        
+        .filtersbuttonResetWrapper {
+          width: 140px;
+          
+          .filtersbuttonReset {
+            gap: 8px;
+            
+            span {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .filters {
+    margin-top: 16px;
+    
+    .filtersContainer {
+      padding: 0 16px;
+      
+      .filtersContent {
+        border-radius: 20px;
+        padding: 12px;
+        
+        .filtersPlankList {
+          margin-bottom: 14px;
+          flex-direction: column;
+          
+          .plankItem {
+            width: 100%;
+            padding-left: 0;
+            padding-right: 0;
+            margin-bottom: 8px;
+            
+            .filterDropdownGenres {
+              left: 0;
+              right: 0;
+              width: 100%;
+              z-index: 120;
+              border-radius: 14px;
+              
+              .filterDropdownGenresContent {
+                padding: 12px;
+                gap: 8px;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                border-radius: 14px;
+                
+                .poster {
+                  width: 75px;
+                  padding: 10px 6px;
+                  border-radius: 35px;
+                  flex-shrink: 0;
+                  
+                  img {
+                    max-width: 26px;
+                    margin-bottom: 5px;
+                  }
+                  
+                  .titleCaption {
+                    font-size: 11px;
+                  }
+                }
+              }
+            }
+            
+            .plank {
+              padding: 8px 12px;
+              height: 50px;
+              border-radius: 12px;
+              
+              &:hover {
+                transform: none;
+                background-color: rgba(49, 43, 69, 0.3);
+              }
+              
+              .plankInner {
+                gap: 2px;
+                
+                .plankLabel {
+                  font-size: 15px;
+                  font-weight: 500;
+                }
+                
+                .selectedFilterValue {
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+        
+        .filtersbuttonResetWrapper {
+          width: 140px;
+          
+          .filtersbuttonReset {
+            gap: 8px;
+            padding: 8px 0;
+            
+            span {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .filters {
+    margin-top: 12px;
+    
+    .filtersContainer {
+      padding: 0 12px;
+      
+      .filtersContent {
+        border-radius: 16px;
+        padding: 8px;
+        
+        .filtersPlankList {
+          margin-bottom: 12px;
+          flex-direction: column;
+          
+          .plankItem {
+            width: 100%;
+            margin-bottom: 6px;
+            
+            .filterDropdownGenres {
+              left: 0;
+              right: 0;
+              width: 100%;
+              z-index: 130;
+              border-radius: 12px;
+              
+              .filterDropdownGenresContent {
+                padding: 10px;
+                gap: 6px;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                border-radius: 12px;
+                
+                .poster {
+                  width: 65px;
+                  padding: 8px 5px;
+                  border-radius: 30px;
+                  text-align: center;
+                  
+                  img {
+                    max-width: 22px;
+                    margin-bottom: 4px;
+                  }
+                  
+                  .titleCaption {
+                    font-size: 10px;
+                  }
+                }
+              }
+            }
+            
+            .plank {
+              padding: 8px 10px;
+              height: 48px;
+              border-radius: 10px;
+              
+              &:hover {
+                transform: none;
+                background-color: rgba(49, 43, 69, 0.3);
+              }
+              
+              .plankInner {
+                gap: 2px;
+                
+                .plankLabel {
+                  font-size: 14px;
+                  font-weight: 500;
+                }
+                
+                .selectedFilterValue {
+                  font-size: 11px;
+                }
+              }
+              
+              .arrow {
+                width: 16px;
+                height: 16px;
+                flex-shrink: 0;
+              }
+            }
+          }
+        }
+        
+        .filtersbuttonResetWrapper {
+          width: 130px;
+          
+          .filtersbuttonReset {
+            gap: 6px;
+            padding: 6px 0;
+            
+            svg {
+              width: 16px;
+              height: 16px;
+            }
+            
+            span {
+              font-size: 13px;
+              line-height: 1.3;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 360px) {
+  .filters {
+    .filtersContainer {
+      padding: 0 8px;
+      
+      .filtersContent {
+        padding: 6px;
+        
+        .filtersPlankList {
+          .plankItem {
+            .filterDropdownGenres {
+              border-radius: 10px;
+              
+              .filterDropdownGenresContent {
+                padding: 8px;
+                gap: 4px;
+                border-radius: 10px;
+                
+                .poster {
+                  width: 60px;
+                  padding: 6px 4px;
+                  border-radius: 25px;
+                  
+                  img {
+                    max-width: 18px;
+                    margin-bottom: 3px;
+                  }
+                  
+                  .titleCaption {
+                    font-size: 9px;
+                  }
+                }
+              }
+            }
+            
+            .plank {
+              padding: 6px 8px;
+              height: 44px;
+              
+              .plankInner {
+                .plankLabel {
+                  font-size: 13px;
+                }
+                
+                .selectedFilterValue {
+                  font-size: 10px;
+                }
+              }
+              
+              .arrow {
+                width: 14px;
+                height: 14px;
+              }
+            }
+          }
+        }
+        
+        .filtersbuttonResetWrapper {
+          width: 120px;
+          
+          .filtersbuttonReset {
+            gap: 4px;
+            
+            svg {
+              width: 14px;
+              height: 14px;
+            }
+            
+            span {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

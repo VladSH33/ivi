@@ -1,0 +1,222 @@
+.searchOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.searchModal {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 60px;
+  min-height: 100vh;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.searchSection {
+  margin-bottom: 60px;
+}
+
+.searchForm {
+  max-width: 900px;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  &:focus-within {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.searchIcon {
+  position: absolute;
+  left: 24px;
+  color: rgba(255, 255, 255, 0.6);
+  z-index: 1;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 20px 24px 20px 60px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  color: white;
+  outline: none;
+  border-radius: 16px;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.content {
+  color: white;
+}
+
+.sectionTitle {
+  font-size: 24px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 32px;
+  margin-top: 0;
+}
+
+.resultsSection {
+  margin-bottom: 60px;
+}
+
+.recommendationsSection {
+  margin-bottom: 40px;
+}
+
+.resultsCount {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0 0 24px 0;
+}
+
+.moviesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+
+@media (max-width: 1024px) {
+  .searchModal {
+    padding: 30px 40px;
+  }
+
+  .title {
+    font-size: 36px;
+  }
+
+  .searchInput {
+    padding: 18px 20px 18px 55px;
+    font-size: 16px;
+  }
+
+  .searchIcon {
+    left: 20px;
+  }
+
+  .moviesGrid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .searchModal {
+    padding: 20px 24px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .header {
+    margin-bottom: 30px;
+  }
+
+  .searchSection {
+    margin-bottom: 40px;
+  }
+
+  .searchInput {
+    padding: 16px 18px 16px 50px;
+    font-size: 15px;
+  }
+
+  .searchIcon {
+    left: 18px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .closeButton {
+    padding: 6px;
+  }
+
+  .sectionTitle {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+
+  .moviesGrid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchModal {
+    padding: 16px 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .searchInput {
+    padding: 14px 16px 14px 45px;
+    font-size: 14px;
+  }
+
+  .searchIcon {
+    left: 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .moviesGrid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+} 

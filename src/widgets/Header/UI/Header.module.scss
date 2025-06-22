@@ -1,0 +1,622 @@
+.header {
+  background: transparent;
+  position: relative;
+  z-index: 50;
+  height: 72px;
+  box-shadow: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  z-index: 301;
+}
+
+.logo {
+  flex-shrink: 0;
+  
+  .logoLink {
+    display: block;
+    color: var(--text-color-primary);
+    text-decoration: none;
+  }
+}
+
+.myIviMenuItem {
+  .myIviLink {
+    color: var(--text-color-primary);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    
+    &:hover {
+      color: var(--text-color-secondary);
+    }
+  }
+}
+
+.nav {
+  flex-grow: 1;
+}
+
+.menu {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menuItem {
+  .menuLink {
+    color: var(--text-color-primary);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    
+    &:hover {
+      color: var(--text-color-secondary);
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.subscribeButton {
+  background: #ea003d;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background: #ff0f4d;
+  }
+}
+
+.subscribedStatus {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #00c851 0%, #00a142 100%);
+  padding: 6px 14px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 200, 81, 0.3);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s ease;
+  
+  &::before {
+    content: '✓';
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+  }
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 200, 81, 0.4);
+  }
+}
+
+.searchButton {
+  background: none;
+  border: none;
+  color: var(--text-color-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px;
+  
+  span {
+    font-size: 15px;
+  }
+  
+  &:hover { 
+    color: var(--text-color-secondary);
+  }
+}
+
+.notifyButton {
+  background: none;
+  border: none;
+  color: var(--text-color-primary);
+  cursor: pointer;
+  padding: 8px;
+  
+  &:hover {
+    color: var(--text-color-secondary);
+  }
+}
+
+.profileButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  
+  &:hover {
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    color: #fff;
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  span {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.loginButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-color-primary);
+  text-decoration: none;
+  font-size: 15px;
+  padding: 8px;
+  
+  &:hover {
+    color: var(--text-color-secondary);
+  }
+}
+
+.themeToggleButton {
+  background: none;
+  border: none;
+  color: var(--text-color-primary);
+  cursor: pointer;
+  font-size: 15px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 120px;
+  
+  &:hover {
+    color: var(--text-color-secondary);
+  }
+}
+
+.dropdownWrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: -1;
+  pointer-events: none;
+  background: transparent;
+  height: auto;
+  min-height: 72px;
+  box-shadow: 0 20px 96px #12101b;
+  background: #211c2f;
+  max-width: 1200px;
+  min-width: 900px;
+  transform: translateY(4px);
+  border-radius: 20px;
+}
+
+.dropdown {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  height: auto;
+  box-sizing: border-box;
+  margin-top: 68px;
+  padding: 32px;
+  position: relative;
+  transition: box-shadow 0.3s, background 0.3s;
+}
+
+.dropdown::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 32px;
+  right: 32px;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  z-index: 2;
+  transition: background 0.3s, opacity 0.3s;
+}
+
+.dropdownContent {
+  display: flex;
+  height: 328px;
+  width: 100%;
+}
+
+.dropdownContent__doubleColumn {
+  width: 33.3333%;
+  box-sizing: border-box;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.dropdownContent__singleColumn {
+  width: 16.6667%;
+  box-sizing: border-box;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.dropdownContent__sideContent {
+  width: 50%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.doubleColumn {
+  width: 33.3333%;
+  box-sizing: border-box;
+  padding-left: 12px;
+  padding-right: 12px;
+  height: 100%;
+  column-count: 2;
+  column-gap: 32px;
+}
+
+.singleColumn {
+  width: 16.66666667%;
+  box-sizing: border-box;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.sideContent {
+  width: 50%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 12px;
+  padding-right: 12px;
+  position: relative;
+}
+
+.sideContent::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 32px;
+  bottom: 32px;
+  width: 1px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 1px;
+  transition: background 0.3s, opacity 0.3s;
+}
+
+.sideContentWidget {
+  width: 244px;
+  
+  :global {
+    .subscription-teaser {
+      width: 100%;
+      max-width: 280px;
+    }
+  }
+}
+
+.linksList {
+  .title {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .item {
+    color: #a5a1b2;
+    font-size: 15px;
+    cursor: pointer;
+    
+    &:hover {
+      color: #ea003d;
+    }
+  }
+}
+
+.linkSmartTv {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  background: #2d2740;
+  border-radius: 12px;
+  padding: 12px 24px;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 16px;
+  
+  &:hover {
+    background: #3a3155;
+    color: #fff;
+  }
+
+  .imgSvg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.dropdownWrapper,
+.dropdown,
+.dropdownContent {
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.dropdownContent .title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.dropdownContent .item {
+  font-size: 18px;
+}
+
+.menuLink,
+.myIviLink,
+.profileButton,
+.loginButton,
+.themeToggleButton,
+.searchButton,
+.notifyButton,
+.subscribeButton,
+.linkSmartTv,
+.dropdownContent .item {
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+
+.mobileNavigation {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(18, 15, 30, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+  z-index: 1000;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.mobileNavItems {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.mobileNavItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 8px;
+  text-decoration: none;
+  color: var(--text-color-secondary);
+  font-size: 10px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-width: 65px;
+  border-radius: 8px;
+  position: relative;
+  
+  &:hover {
+    color: var(--text-color-primary);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  &.active {
+    color: #ea003d;
+    
+    .mobileNavIcon {
+      transform: scale(1.1);
+    }
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 2px;
+      background: #ea003d;
+      border-radius: 2px;
+    }
+  }
+}
+
+.mobileNavIcon {
+  width: 22px;
+  height: 22px;
+  margin-bottom: 1px;
+  transition: transform 0.2s ease;
+}
+
+.themeToggleMobile {
+  background: none;
+  border: none;
+  cursor: pointer;
+  
+  &:hover {
+    color: var(--text-color-primary);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+
+@media (max-width: 1100px) {
+  .myIviMenuItem,
+  .nav,
+  .searchButton,
+  .notifyButton,
+  .themeToggleButton,
+  .profileButton,
+  .loginButton {
+    display: none;
+  }
+  
+  .actions {
+    gap: 8px;
+    margin-left: auto;
+  }
+  
+  .subscribeButton {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+  
+  .subscribedStatus {
+    font-size: 14px;
+  }
+  
+  .profileButton {
+    padding: 6px 12px;
+    font-size: 13px;
+    
+    &::before {
+      font-size: 11px;
+    }
+  }
+  
+  .container {
+    padding: 0 20px;
+    gap: 16px;
+  }
+  
+  .dropdownWrapper {
+    display: none;
+  }
+  
+  .mobileNavigation {
+    display: block;
+  }
+  
+  .mobileNavItems {
+    justify-content: space-between;
+    max-width: 600px;
+  }
+  
+  .mobileNavItem {
+    min-width: 55px;
+    padding: 8px 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 60px;
+  }
+  
+  .container {
+    padding: 0 16px;
+  }
+  
+  .subscribeButton {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  
+  .subscribedStatus {
+    font-size: 13px;
+  }
+  
+  .profileButton {
+    padding: 5px 10px;
+    font-size: 12px;
+    
+    &::before {
+      font-size: 10px;
+    }
+  }
+  
+  .logo .logoLink svg {
+    width: 50px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+  
+  .subscribeButton {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+  
+  .subscribedStatus {
+    font-size: 12px;
+  }
+  
+  .profileButton {
+    padding: 4px 8px;
+    font-size: 11px;
+    
+    &::before {
+      font-size: 9px;
+    }
+  }
+}

@@ -1,0 +1,323 @@
+.container {
+  width: 1240px;
+  padding: 0 20px;
+  margin: 0 auto;
+  max-width: 100%;
+
+  .oversideVideoContainer {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+
+    .meta {
+      margin-top: 2rem;
+      flex: 1;
+
+      .metaContainer {
+        display: block;
+
+        .title {
+          font-size: 42px;
+          line-height: 44px;
+        }
+
+        .filmDetails {
+          margin-top: 20px;
+          .infoList {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+
+            .infoItem {
+              color: #a5a1b2;
+              font-size: 15px;
+              font-weight: 700;
+            }
+          }
+
+          .genresList {
+            margin-top: 1rem;
+            .genresListContainer {
+              flex-wrap: wrap;
+              gap: 8px;
+              height: auto;
+              min-height: 20px;
+              overflow: visible;
+              display: flex;
+
+              .genreTag {
+                font-size: 13px;
+                font-weight: 500;
+                align-items: center;
+                border-radius: 4px 4px 4px 4px;
+                padding: 2px 6px;
+                background-color: hsla(0, 0%, 100%, 0.16);
+              }
+            }
+          }
+        }
+
+        .synopsis {
+          margin-top: 2rem;
+          color: hsla(0, 0%, 100%, 0.88);
+          font-size: 15px;
+          font-style: normal;
+          font-weight: 400;
+          text-overflow: ellipsis;
+        }
+
+        .actionButtons {
+          align-items: center;
+          display: flex;
+          gap: 1rem;
+          margin: 2rem 0;
+          flex-wrap: wrap;
+
+          .watchButton {
+            background-color: #f30745;
+            border-color: #f30745;
+            border-radius: 2rem;
+            border-width: 1px;
+            height: 38px;
+            width: 60%;
+            min-width: 200px;
+            padding: 5px 20px;
+            transition: all 0.2s ease;
+            font-weight: 200;
+            color: hsla(0, 0%, 100%, 0.72);
+
+            &:hover {
+              background-color: #f9255d;
+              border-color: #f9255d;
+              transform: scale(1.04);
+            }
+
+            .watchButtonText {
+              font-weight: 700;
+              color: hsla(0, 0%, 100%, 1);
+            }
+          }
+
+          .favoriteButton,
+          .shareButton {
+            display: flex;
+            border-radius: 16px;
+            border-width: 0;
+            padding: 16px;
+            background-color: hsla(0, 0%, 100%, 0.08);
+            border-color: hsla(0, 0%, 100%, 0.08);
+            transition: all 0.2s ease;
+
+            &:hover {
+              background-color: hsla(0, 0%, 100%, 0.2);
+              transform: scale(1.04);
+            }
+          }
+        }
+      }
+    }
+    .videoBox {
+      margin-top: 2rem;
+      overflow: hidden;
+      border-radius: 8px;
+      flex: 1;
+
+      video,
+      iframe {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .container {
+    width: 100%;
+    padding: 0 16px;
+
+    .oversideVideoContainer {
+      gap: 1.5rem;
+
+      .meta {
+        .metaContainer {
+          .title {
+            font-size: 36px;
+            line-height: 38px;
+          }
+
+          .synopsis {
+            margin-top: 1.5rem;
+            font-size: 14px;
+          }
+
+          .actionButtons {
+            margin: 1.5rem 0;
+            gap: 0.8rem;
+
+            .watchButton {
+              width: 70%;
+              min-width: 180px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 12px;
+
+    .oversideVideoContainer {
+      flex-direction: column;
+      gap: 1rem;
+
+      .meta {
+        margin-top: 1rem;
+        order: 2;
+
+        .metaContainer {
+          .title {
+            font-size: 28px;
+            line-height: 32px;
+          }
+
+          .filmDetails {
+            margin-top: 16px;
+
+            .infoList {
+              gap: 0.5rem;
+
+              .infoItem {
+                font-size: 13px;
+              }
+            }
+
+            .genresList {
+              margin-top: 0.8rem;
+
+              .genresListContainer {
+                gap: 6px;
+
+                .genreTag {
+                  font-size: 12px;
+                  padding: 1px 4px;
+                }
+              }
+            }
+          }
+
+          .synopsis {
+            margin-top: 1rem;
+            font-size: 13px;
+          }
+
+          .actionButtons {
+            margin: 1.5rem 0;
+            gap: 0.8rem;
+
+            .watchButton {
+              width: 100%;
+              min-width: auto;
+              height: 44px;
+              font-size: 16px;
+            }
+
+            .favoriteButton,
+            .shareButton {
+              padding: 12px;
+            }
+          }
+        }
+      }
+
+      .videoBox {
+        margin-top: 0;
+        order: 1;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 8px;
+
+    .oversideVideoContainer {
+      .meta {
+        .metaContainer {
+          .title {
+            font-size: 24px;
+            line-height: 28px;
+          }
+
+          .filmDetails {
+            margin-top: 12px;
+
+            .infoList {
+              .infoItem {
+                font-size: 12px;
+              }
+            }
+          }
+
+          .synopsis {
+            font-size: 12px;
+          }
+
+          .actionButtons {
+            align-items: stretch;
+            gap: 0.8rem;
+
+            .watchButton {
+              width: 100%;
+              height: 48px;
+            }
+
+            .favoriteButton,
+            .shareButton {
+              align-self: center;
+              padding: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media (max-width: 320px) {
+  .container {
+    padding: 0 4px;
+
+    .oversideVideoContainer {
+      .meta {
+        .metaContainer {
+          .title {
+            font-size: 20px;
+            line-height: 24px;
+          }
+
+          .actionButtons {
+            .favoriteButton,
+            .shareButton {
+              display: flex;
+              width: 48px;
+              height: 48px;
+              justify-content: center;
+              align-items: center;
+              padding: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

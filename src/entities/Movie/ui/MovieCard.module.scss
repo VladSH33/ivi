@@ -1,0 +1,340 @@
+.card {
+  position: relative;
+  border-radius: 1.8rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  .slideImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    .overlay {
+      opacity: 1;
+    }
+
+    .content,
+    .actions {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+.content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  bottom: 12px;
+  left: 0;
+  padding: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease 0.1s;
+  z-index: 2;
+  width: 85%;
+  color: rgba(255, 255, 255, 1);
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: rgba(255, 255, 255, 1);
+}
+
+.rating {
+  color: rgba(255, 255, 255, 1);
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.description {
+  font-weight: 500;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  line-height: 1.4;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  
+  div {
+    position: relative;
+    
+    &:not(:last-child)::after {
+      content: "•";
+      margin-left: 4px;
+      opacity: 0.6;
+    }
+  }
+}
+
+.actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 4;
+
+  .card:hover & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.actionButton {
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
+  min-width: 36px;
+  min-height: 36px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+  }
+
+  .iconSvg {
+    width: 16px;
+    height: 16px;
+    transition: all 0.2s ease;
+  }
+}
+
+
+@media (max-width: 1240px) {
+  .card {
+    border-radius: 1.6rem;
+    
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+  
+  .content {
+    padding: 14px;
+    gap: 0.7rem;
+    bottom: 10px;
+    width: 88%;
+  }
+  
+  .rating {
+    font-size: 1.8rem;
+    line-height: 1.1;
+  }
+  
+  .description {
+    font-size: 12px;
+    gap: 3px;
+    
+    div:not(:last-child)::after {
+      margin-left: 3px;
+    }
+  }
+  
+  .actions {
+    top: 8px;
+    right: 8px;
+    gap: 6px;
+  }
+  
+  .actionButton {
+    padding: 6px;
+    min-width: 32px;
+    min-height: 32px;
+    
+    .iconSvg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    border-radius: 1.4rem;
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+  
+  .content {
+    padding: 12px;
+    gap: 0.6rem;
+    bottom: 8px;
+    width: 92%;
+  }
+  
+  .rating {
+    font-size: 1.6rem;
+    line-height: 1.1;
+  }
+  
+  .description {
+    font-size: 13px;
+    gap: 3px;
+    
+    div:not(:last-child)::after {
+      margin-left: 3px;
+    }
+  }
+  
+  .actions {
+    top: 6px;
+    right: 6px;
+    gap: 5px;
+  }
+  
+  .actionButton {
+    padding: 8px;
+    min-width: 40px;
+    min-height: 40px;
+    
+    .iconSvg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    border-radius: 1.2rem;
+    
+    &:hover {
+      transform: none;
+    }
+  }
+  
+  .content {
+    padding: 12px;
+    gap: 0.6rem;
+    bottom: 8px;
+    width: 80%;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .overlay {
+    opacity: 1;
+  }
+  
+  .rating {
+    font-size: 1.8rem;
+    line-height: 1.1;
+  }
+  
+  .description {
+    font-size: 15px;
+    gap: 3px;
+    font-weight: 600;
+    
+    div:not(:last-child)::after {
+      margin-left: 3px;
+    }
+  }
+  
+  .actions {
+    top: 8px;
+    right: 8px;
+    opacity: 1;
+    transform: translateY(0);
+    gap: 4px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 50%;
+    justify-content: flex-end;
+  }
+  
+  .actionButton {
+    padding: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    background-color: rgba(0, 0, 0, 0.7);
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+    
+    .iconSvg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+
+@media (max-width: 360px) {
+  .card {
+    border-radius: 1rem;
+  }
+  
+  .content {
+    padding: 10px;
+    gap: 0.5rem;
+    bottom: 6px;
+    width: 98%;
+  }
+  
+  .rating {
+    font-size: 1.6rem;
+    line-height: 1.1;
+  }
+  
+  .description {
+    font-size: 14px;
+    gap: 2px;
+    font-weight: 600;
+    
+    div:not(:last-child)::after {
+      margin-left: 2px;
+    }
+  }
+  
+  .actions {
+    top: 6px;
+    right: 6px;
+    gap: 3px;
+    max-width: 60%;
+  }
+  
+  .actionButton {
+    padding: 8px;
+    min-width: 40px;
+    min-height: 40px;
+    
+    .iconSvg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}

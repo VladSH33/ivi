@@ -12,7 +12,6 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, duration }) 
   const [totalDuration, setTotalDuration] = useState(duration || 0);
   const [isDragging, setIsDragging] = useState(false);
   
-  console.log('AudioPlayer initialized with duration:', duration);
   
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
@@ -23,22 +22,13 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, duration }) 
 
     const handleLoadedMetadata = () => {
       const audioDuration = audio.duration;
-      console.log('Audio metadata loaded:', {
-        audioDuration,
-        propDuration: duration,
-        audioUrl,
-        isValidAudioDuration: audioDuration && !isNaN(audioDuration) && isFinite(audioDuration)
-      });
       
       if (audioDuration && !isNaN(audioDuration) && isFinite(audioDuration) && audioDuration > 0) {
         setTotalDuration(audioDuration);
-        console.log('Using audio metadata duration:', audioDuration);
       } else if (duration > 0) {
         setTotalDuration(duration);
-        console.log('Using prop duration:', duration);
       } else {
         setTotalDuration(1);
-        console.log('Using fallback duration: 1 second');
       }
     };
 
@@ -81,10 +71,8 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, duration }) 
   }, [audioUrl, duration]);
 
   useEffect(() => {
-    console.log('Duration prop changed:', duration);
     if (duration !== undefined) {
       setTotalDuration(duration);
-      console.log('Updated totalDuration to:', duration);
     }
   }, [duration]);
 
@@ -126,15 +114,7 @@ export const AudioPlayer: React.FC<AudioPlayerProps> = ({ audioUrl, duration }) 
       targetTime = clickRatio * estimatedDuration;
     }
     
-    console.log('Progress click:', {
-      clickX,
-      progressWidth,
-      clickRatio,
-      targetTime,
-      totalDuration,
-      audioDuration: audio.duration,
-      audioReadyState: audio.readyState
-    });
+
 
     try {
       if (targetTime >= 0) {

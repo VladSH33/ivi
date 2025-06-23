@@ -48,6 +48,19 @@ class SupportWebSocketService {
   private chatId: string | null = null;
   private reconnectAttempts = 0;
   private maxReconnectAttempts = 5;
+  private wsUrl: string;
+
+  constructor() {
+    if (process.env.NODE_ENV === 'development') {
+      this.wsUrl = 'ws://localhost:8080/ws/support';
+    } else {
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const host = window.location.host;
+      this.wsUrl = `${protocol}//${host}/ws/support`;
+    }
+    
+    console.log('WebSocket URL:', this.wsUrl);
+  }
 
   connect(userId: string, chatId: string) {
     this.userId = userId;
@@ -61,82 +74,151 @@ class SupportWebSocketService {
     }
 
     this.updateStatus('connecting');
+    console.log(`Подключение к WebSocket... (попытка ${this.reconnectAttempts + 1})`);
     
-    this.createMockWebSocket();
-  }
-
-  private createMockWebSocket() {
-    const mockWs = {
-      readyState: WebSocket.OPEN,
-      send: (data: string) => {
-        console.log('Mock WebSocket send:', data);
-        setTimeout(() => {
-          this.handleMockMessage(data);
-        }, 1000 + Math.random() * 2000);
-      },
-      close: () => {
-        this.updateStatus('disconnected');
-      },
-      addEventListener: () => {},
-      removeEventListener: () => {},
-    } as any;
-
-    this.ws = mockWs;
-    this.updateStatus('connected');
-    this.startPingPong();
-    this.reconnectAttempts = 0;
-
-    setTimeout(() => {
-      this.notifyMessageListeners({
-        id: Date.now().toString(),
-        userId: 'support',
-        chatId: this.chatId!,
-        content: 'Здравствуйте! Я оператор службы поддержки. Чем могу помочь?',
-        type: 'text',
-        timestamp: Date.now(),
-        isFromSupport: true,
-      });
-    }, 2000);
-  }
-
-  private handleMockMessage(sentData: string) {
     try {
-      const message = JSON.parse(sentData);
-      if (message.type === 'message') {
-        const responses = [
-          'Благодарю за обращение. Рассматриваю ваш вопрос.',
-          'Понятно. Сейчас проверю информацию по вашей проблеме.',
-          'Я передал ваше обращение специалисту. Ожидайте ответа.',
-          'Мы работаем над решением вашего вопроса.',
-          'Спасибо за предоставленную информацию.',
-        ];
-        
-        const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-        
-        this.notifyMessageListeners({
-          id: Date.now().toString(),
-          userId: 'support',
-          chatId: this.chatId!,
-          content: randomResponse,
-          type: 'text',
-          timestamp: Date.now(),
-          isFromSupport: true,
-        });
-      }
+      this.ws = new WebSocket(this.wsUrl);
+      this.setupWebSocketHandlers();
     } catch (error) {
-      console.error('Error handling mock message:', error);
+      console.error('Ошибка создания WebSocket:', error);
+      this.scheduleReconnect();
     }
   }
 
+  private setupWebSocketHandlers() {
+    if (!this.ws) return;
+
+    console.log('Настройка обработчиков WebSocket...');
+
+    this.ws.onopen = () => {
+      console.log('WebSocket подключен успешно!');
+      this.updateStatus('connected');
+      this.reconnectAttempts = 0;
+      
+      this.sendConnectionInfo();
+      this.startPingPong();
+    };
+
+    this.ws.onmessage = (event) => {
+      try {
+        const message: WebSocketMessage = JSON.parse(event.data);
+        console.log('Получено WebSocket сообщение:', message);
+        this.handleWebSocketMessage(message);
+      } catch (error) {
+        console.error('❌ Ошибка парсинга WebSocket сообщения:', error);
+      }
+    };
+
+    this.ws.onclose = (event) => {
+      console.log('WebSocket соединение закрыто:', {
+        code: event.code,
+        reason: event.reason,
+        wasClean: event.wasClean
+      });
+      
+      this.updateStatus('disconnected');
+      this.cleanup();
+      
+      if (event.code !== 1000 && this.reconnectAttempts < this.maxReconnectAttempts) {
+        this.scheduleReconnect();
+      }
+    };
+
+    this.ws.onerror = (error) => {
+      console.error('❌ Ошибка WebSocket:', error);
+      this.updateStatus('disconnected');
+    };
+  }
+
+  private sendConnectionInfo() {
+    if (!this.ws || this.ws.readyState !== WebSocket.OPEN) return;
+
+    console.log('Отправляем информацию о подключении на сервер');
+    
+    const connectionMessage: WebSocketMessage = {
+      type: 'user_joined',
+      payload: {
+        userId: this.userId!,
+        chatId: this.chatId!,
+        timestamp: Date.now(),
+      },
+      timestamp: Date.now(),
+    };
+
+    this.ws.send(JSON.stringify(connectionMessage));
+  }
+
+  private handleWebSocketMessage(message: WebSocketMessage) {
+    console.log('Обработка WebSocket сообщения:', message.type);
+    
+    switch (message.type) {
+      case 'message':
+        if (message.payload) {
+          console.log('Получено новое сообщение чата');
+          this.notifyMessageListeners(message.payload as ChatMessage);
+        }
+        break;
+      case 'pong':
+        console.log('Получен pong от сервера');
+        break;
+      case 'user_joined':
+        console.log('Пользователь присоединился:', message.payload);
+        break;
+      case 'user_left':
+        console.log('Пользователь покинул чат:', message.payload);
+        break;
+      case 'typing':
+        console.log('Пользователь печатает:', message.payload);
+        break;
+      default:
+        console.log('Неизвестный тип сообщения:', message.type);
+    }
+  }
+
+  private scheduleReconnect() {
+    if (this.reconnectAttempts >= this.maxReconnectAttempts) {
+      console.log('Достигнуто максимальное количество попыток переподключения');
+      this.updateStatus('disconnected');
+      return;
+    }
+
+    this.reconnectAttempts++;
+    const delay = Math.min(1000 * Math.pow(2, this.reconnectAttempts), 30000);
+    
+    console.log(`Переподключение через ${delay}ms (попытка ${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
+    
+    this.reconnectTimer = setTimeout(() => {
+      this.connectWebSocket();
+    }, delay);
+  }
+
+  private cleanup() {
+    if (this.pingInterval) {
+      clearInterval(this.pingInterval);
+      this.pingInterval = null;
+    }
+  }
+
+
+
   private startPingPong() {
+    console.log('Запуск ping/pong heartbeat');
+    
     this.pingInterval = setInterval(() => {
       if (this.ws?.readyState === WebSocket.OPEN) {
         const pingMessage: WebSocketMessage = {
           type: 'ping',
-          payload: {},
+          payload: {
+            userId: this.userId,
+            chatId: this.chatId,
+          },
           timestamp: Date.now(),
         };
+        
+        console.log('Отправка ping на сервер');
         this.ws.send(JSON.stringify(pingMessage));
+      } else {
+        console.log('WebSocket не готов для ping, состояние:', this.ws?.readyState);
       }
     }, 30000);
   }
@@ -164,15 +246,29 @@ class SupportWebSocketService {
         timestamp: Date.now(),
       };
 
+      console.log('Отправка текстового сообщения:', content);
       this.ws.send(JSON.stringify(message));
       
       this.notifyMessageListeners(userMessage);
     } else {
-      console.log('WebSocket not ready:', {
-        wsReady: this.ws?.readyState === WebSocket.OPEN,
+      console.error('WebSocket не готов для отправки сообщения:', {
+        wsState: this.ws?.readyState,
+        wsStateText: this.getWebSocketStateText(),
         userId: this.userId,
         chatId: this.chatId
       });
+      throw new Error('Соединение с сервером потеряно');
+    }
+  }
+
+  private getWebSocketStateText(): string {
+    if (!this.ws) return 'null';
+    switch (this.ws.readyState) {
+      case WebSocket.CONNECTING: return 'CONNECTING';
+      case WebSocket.OPEN: return 'OPEN';
+      case WebSocket.CLOSING: return 'CLOSING';
+      case WebSocket.CLOSED: return 'CLOSED';
+      default: return 'UNKNOWN';
     }
   }
 
@@ -254,22 +350,36 @@ class SupportWebSocketService {
   }
 
   disconnect() {
-    if (this.pingInterval) {
-      clearInterval(this.pingInterval);
-      this.pingInterval = null;
-    }
+    console.log('Отключение от WebSocket...');
+    
+    this.cleanup();
     
     if (this.reconnectTimer) {
       clearTimeout(this.reconnectTimer);
       this.reconnectTimer = null;
     }
 
-    if (this.ws) {
-      this.ws.close();
+    if (this.ws) { 
+      if (this.ws.readyState === WebSocket.OPEN) {
+        const leaveMessage: WebSocketMessage = {
+          type: 'user_left',
+          payload: {
+            userId: this.userId,
+            chatId: this.chatId,
+          },
+          timestamp: Date.now(),
+        };
+        
+        console.log('Отправка уведомления о выходе');
+        this.ws.send(JSON.stringify(leaveMessage));
+      }
+      
+      this.ws.close(1000, 'User disconnected');
       this.ws = null;
     }
 
     this.updateStatus('disconnected');
+    console.log('WebSocket отключен');
   }
 
   getStatus() {
